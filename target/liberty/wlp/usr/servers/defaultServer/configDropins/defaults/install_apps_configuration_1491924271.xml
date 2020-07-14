@@ -1,4 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<server>
-    <webApplication id="liberty-rest-app" location="liberty-rest-app.war" name="liberty-rest-app"/>
-</server>
