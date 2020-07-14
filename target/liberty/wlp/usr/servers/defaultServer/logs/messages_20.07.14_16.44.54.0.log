@@ -1,0 +1,41 @@
+********************************************************************************
+product = Open Liberty 20.0.0.7 (wlp-1.0.42.cl200720200625-0300)
+wlp.install.dir = /home/mark/data/git-repos/libertyRest/target/liberty/wlp/
+java.home = /usr/lib/jvm/java-1.8.0-openjdk-1.8.0.252.b09-1.fc32.x86_64/jre
+java.version = 1.8.0_252
+java.runtime = OpenJDK Runtime Environment (1.8.0_252-b09)
+os = Linux (5.6.19-300.fc32.x86_64; amd64) (en_GB)
+process = 671432@mark-fedora
+********************************************************************************
+[14/07/20 16:22:18:610 BST] 00000001 com.ibm.ws.kernel.launch.internal.FrameworkManager           A CWWKE0001I: The server defaultServer has been launched.
+[14/07/20 16:22:18:945 BST] 00000016 com.ibm.ws.config.xml.internal.ServerXMLConfiguration        A CWWKG0093A: Processing configuration drop-ins resource: /home/mark/data/git-repos/libertyRest/target/liberty/wlp/usr/servers/defaultServer/configDropins/defaults/install_apps_configuration_1491924271.xml
+[14/07/20 16:22:18:954 BST] 00000016 com.ibm.ws.config.xml.internal.ServerXMLConfiguration        A CWWKG0093A: Processing configuration drop-ins resource: /home/mark/data/git-repos/libertyRest/target/liberty/wlp/usr/servers/defaultServer/configDropins/overrides/liberty-plugin-variable-config.xml
+[14/07/20 16:22:19:161 BST] 00000001 com.ibm.ws.kernel.launch.internal.FrameworkManager           I CWWKE0002I: The kernel started after 0.677 seconds
+[14/07/20 16:22:19:176 BST] 0000001f com.ibm.ws.kernel.feature.internal.FeatureManager            I CWWKF0007I: Feature update started.
+[14/07/20 16:22:19:732 BST] 00000016 com.ibm.ws.app.manager.internal.monitor.DropinMonitor        A CWWKZ0058I: Monitoring dropins for applications.
+[14/07/20 16:22:19:929 BST] 00000015 g.apache.cxf.cxf.core.3.2:1.0.42.cl200720200625-0300(id=85)] I Aries Blueprint packages not available. So namespaces will not be registered
+[14/07/20 16:22:19:995 BST] 00000029 com.ibm.ws.app.manager.AppMessageHelper                      W CWWKZ0014W: The application guide-rest-intro could not be started as it could not be found at location guide-rest-intro.war.
+[14/07/20 16:22:20:010 BST] 00000028 com.ibm.ws.app.manager.AppMessageHelper                      I CWWKZ0018I: Starting application liberty-rest-app.
+[14/07/20 16:22:20:011 BST] 00000028 bm.ws.app.manager.war.internal.WARDeployedAppInfoFactoryImpl I CWWKZ0134I: The liberty-rest-app application is using the loose application definition at the /home/mark/data/git-repos/libertyRest/target/liberty/wlp/usr/servers/defaultServer/apps/liberty-rest-app.war.xml location.
+[14/07/20 16:22:20:219 BST] 00000028 com.ibm.ws.session.WASSessionCore                            I SESN8501I: The session manager did not find a persistent storage location; HttpSession objects will be stored in the local application server's memory.
+[14/07/20 16:22:20:223 BST] 00000028 com.ibm.ws.webcontainer.osgi.webapp.WebGroup                 I SRVE0169I: Loading Web Module: Liberty Project.
+[14/07/20 16:22:20:225 BST] 00000028 com.ibm.ws.webcontainer                                      I SRVE0250I: Web Module Liberty Project has been bound to default_host.
+[14/07/20 16:22:20:225 BST] 00000028 com.ibm.ws.http.internal.VirtualHostImpl                     A CWWKT0016I: Web application available (default_host): http://mark-fedora:9080/liberty-rest-app/
+[14/07/20 16:22:20:261 BST] 0000002c com.ibm.ws.session.WASSessionCore                            I SESN0176I: A new session context will be created for application key default_host/liberty-rest-app
+[14/07/20 16:22:20:268 BST] 0000002c com.ibm.ws.util                                              I SESN0172I: The session manager is using the Java default SecureRandom implementation for session ID generation.
+[14/07/20 16:22:20:300 BST] 0000002c com.ibm.ws.app.manager.AppMessageHelper                      A CWWKZ0001I: Application liberty-rest-app started in 0.289 seconds.
+[14/07/20 16:22:20:313 BST] 0000001f com.ibm.ws.tcpchannel.internal.TCPPort                       I CWWKO0219I: TCP Channel defaultHttpEndpoint has been started and is now listening for requests on host *  (IPv6) port 9080.
+[14/07/20 16:22:20:325 BST] 0000001f com.ibm.ws.kernel.feature.internal.FeatureManager            A CWWKF0012I: The server installed the following features: [jaxrs-2.1, jaxrsClient-2.1, jsonp-1.1, servlet-4.0].
+[14/07/20 16:22:20:325 BST] 0000001f com.ibm.ws.kernel.feature.internal.FeatureManager            I CWWKF0008I: Feature update completed in 1.166 seconds.
+[14/07/20 16:22:20:326 BST] 0000001f com.ibm.ws.kernel.feature.internal.FeatureManager            A CWWKF0011I: The defaultServer server is ready to run a smarter planet. The defaultServer server started in 1.843 seconds.
+[14/07/20 16:22:20:427 BST] 0000002d com.ibm.ws.webcontainer.osgi.mbeans.PluginGenerator          I SRVE9103I: A configuration file for a web server plugin was automatically generated for this server at /home/mark/data/git-repos/libertyRest/target/liberty/wlp/usr/servers/defaultServer/logs/state/plugin-cfg.xml.
+[14/07/20 16:25:31:789 BST] 0000002b g.apache.cxf.cxf.core.3.2:1.0.42.cl200720200625-0300(id=85)] I Setting the server's publish address to be /System/
+[14/07/20 16:25:31:835 BST] 0000002b com.ibm.ws.webcontainer.servlet                              I SRVE0242I: [liberty-rest-app] [/liberty-rest-app] [io.openliberty.guides.rest.SystemApplication]: Initialization successful.
+[14/07/20 16:25:46:401 BST] 00000029 com.ibm.ws.webcontainer.extension                            W SRVE0190E: File not found: /properties
+[14/07/20 16:41:22:284 BST] 00000010 com.ibm.ws.kernel.launch.internal.FrameworkManager           A CWWKE0085I: The server defaultServer is stopping because the JVM is exiting.
+[14/07/20 16:41:22:293 BST] 00000037 com.ibm.ws.runtime.update.internal.RuntimeUpdateManagerImpl  A CWWKE1100I: Waiting for up to 30 seconds for the server to quiesce.
+[14/07/20 16:41:22:302 BST] 00000028 com.ibm.ws.tcpchannel.internal.TCPChannel                    I CWWKO0220I: TCP Channel defaultHttpEndpoint has stopped listening for requests on host *  (IPv6) port 9080.
+[14/07/20 16:41:22:303 BST] 00000028 com.ibm.ws.http.internal.VirtualHostImpl                     A CWWKT0017I: Web application removed (default_host): http://mark-fedora:9080/liberty-rest-app/
+[14/07/20 16:41:22:306 BST] 00000037 com.ibm.ws.runtime.update.internal.RuntimeUpdateManagerImpl  I CWWKE1101I: Server quiesce complete.
+[14/07/20 16:41:22:340 BST] 00000021 com.ibm.ws.app.manager.AppMessageHelper                      A CWWKZ0009I: The application liberty-rest-app has stopped successfully.
+[14/07/20 16:41:22:489 BST] 00000001 com.ibm.ws.kernel.launch.internal.FrameworkManager           A CWWKE0036I: The server defaultServer stopped after 19 minutes, 4.006 seconds.

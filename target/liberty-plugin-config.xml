@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<liberty-plugin-config>
+    <installDirectory>/home/mark/data/git-repos/libertyRest/target/liberty/wlp</installDirectory>
+    <serverDirectory>/home/mark/data/git-repos/libertyRest/target/liberty/wlp/usr/servers/defaultServer</serverDirectory>
+    <userDirectory>/home/mark/data/git-repos/libertyRest/target/liberty/wlp/usr</userDirectory>
+    <serverOutputDirectory>/home/mark/data/git-repos/libertyRest/target/liberty/wlp/usr/servers/defaultServer</serverOutputDirectory>
+    <serverName>defaultServer</serverName>
+    <configDirectory>/home/mark/data/git-repos/libertyRest/src/main/liberty/config</configDirectory>
+    <configFile>/home/mark/data/git-repos/libertyRest/src/main/liberty/config/server.xml</configFile>
+    <appsDirectory>apps</appsDirectory>
+    <looseApplication>true</looseApplication>
+    <stripVersion>false</stripVersion>
+    <installAppPackages>project</installAppPackages>
+    <applicationFilename>liberty-rest-app.war.xml</applicationFilename>
+    <assemblyArtifact>
+        <groupId>io.openliberty</groupId>
+        <artifactId>openliberty-kernel</artifactId>
+        <version>20.0.0.7</version>
+        <type>zip</type>
+    </assemblyArtifact>
+    <assemblyArchive>/home/mark/.m2/repository/io/openliberty/openliberty-kernel/20.0.0.7/openliberty-kernel-20.0.0.7.zip</assemblyArchive>
+    <assemblyInstallDirectory>/home/mark/data/git-repos/libertyRest/target/liberty</assemblyInstallDirectory>
+    <refresh>false</refresh>
+    <installAppsConfigDropins>/home/mark/data/git-repos/libertyRest/target/liberty/wlp/usr/servers/defaultServer/configDropins/defaults/install_apps_configuration_1491924271.xml</installAppsConfigDropins>
+    <projectType>war</projectType>
+    <projectCompileDependency>com.googlecode.json-simple:json-simple:1.1.1</projectCompileDependency>
+    <projectCompileDependency>junit:junit:4.10</projectCompileDependency>
+    <projectCompileDependency>org.hamcrest:hamcrest-core:1.1</projectCompileDependency>
+</liberty-plugin-config>
