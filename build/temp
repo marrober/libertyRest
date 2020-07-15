@@ -1,0 +1,41 @@
+    - name: gen-server-xml-file
+      command:
+        - /bin/sh
+        - '-c'
+      args:
+        - |-
+          echo "<server description=\"Sample Liberty server\">" > server.xml
+          echo "  <featureManager>" >> server.xml
+          echo "    <feature>jaxrs-2.1</feature>" >> server.xml
+          echo "    <feature>cdi-2.0</feature>" >> server.xml
+          echo "    <feature>mpRestClient-1.4</feature>" >> server.xml
+          echo "    <feature>mpConfig-1.4</feature>" >> server.xml
+          echo "    <feature>jsonp-1.1</feature>" >> server.xml
+          echo "  </featureManager>" >> server.xml
+          echo "  <variable name=\"default.http.port\" defaultValue=\"9080\"/>" >> server.xml
+          echo "  <variable name=\"default.https.port\" defaultValue=\"9443\"/>" >> server.xml
+          echo "  <httpEndpoint host=\"*\" httpPort=\"\${default.http.port}\" httpsPort=\"\${default.https.port}\" id=\"defaultHttpEndpoint\"/>" >> server.xml
+          echo "  <webApplication location=\"petstore.war\" contextRoot=\"/pets\"/>" >> server.xml
+          echo "</server>" >> server.xml
+          echo "Generated Env file"
+          echo "------------------------------"
+          cat env-file
+          echo "------------------------------"
+      image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
+      volumeMounts:
+        - name: envparams
+          mountPath: /env-params
+      workingDir: /env-params
+
+
+          echo "COPY server.xml /config/server.xml" >> ext-dockerfile.gen
+
+    - name: view-server-xml
+      command:
+        - cat
+        - server.xml
+      image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
+      volumeMounts:
+        - name: envparams
+          mountPath: /env-params
+      workingDir: /env-params

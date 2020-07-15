@@ -1,0 +1,47 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  creationTimestamp: "2020-06-26T14:11:45Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/instance: petstore-from-git
+    pipeline.openshift.io/type: kubernetes
+  name: liberty-rest-app
+  namespace: liberty-rest
+spec:
+  resources:
+  - name: app-source
+    type: git
+  - name: output-image
+    type: image
+  - name: builder-image
+    type: image
+  tasks:
+  - name: build
+    resources:
+      inputs:
+      - name: source
+        resource: app-source
+      outputs:
+      - name: output-image
+        resource: output-image
+      - name: builder-image
+        resource: builder-image
+    taskRef:
+      kind: Task
+      name: build
+  - name: create-runtime-image
+    resources:
+      inputs:
+      - name: builder-image
+        resource: builder-image
+      outputs:
+      - name: output-image
+        resource: output-image
+    taskRef:
+      kind: Task
+      name: create-runtime-image
+    runAfter:
+      - build
+      
+      
