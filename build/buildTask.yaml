@@ -31,7 +31,7 @@ spec:
     outputs:
       - name: output-image
         type: image
-      - name: builder-image
+      - name: intermediate-image
         type: image
   steps :
     - name: gen-env-file
@@ -76,6 +76,14 @@ spec:
         - name: envparams
           mountPath: /env-params
       workingDir: /workspace/source
+    - name: view-docker-file
+      command:
+        - cat
+        - /gen-source/Dockerfile.gen
+      image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
+      volumeMounts:
+        - name: gen-source
+          mountPath: /gen-source
     - name: view-workspace
       command:
         - ls
@@ -94,7 +102,7 @@ spec:
         - '-f'
         - /gen-source/Dockerfile.gen
         - '-t'
-        - $(resources.outputs.builder-image.url)
+        - $(resources.outputs.intermediate-image.url)
         - .
       image: registry.redhat.io/rhel8/buildah
       resources: {}
@@ -124,4 +132,4 @@ spec:
       name: gen-source
     - name: pipeline-cache
       persistentVolumeClaim:
-        claimName: pipeline-task-cache-pvc 
+        claimName: pipeline-task-cache-pvc-2

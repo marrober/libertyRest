@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: liberty-rest-app-run-pr-
+spec:
+  pipelineRef:
+    name: liberty-rest-app
+  resources:
+    - name: app-source
+      resourceRef:
+        name: liberty-rest-app-source-code
+    - name: output-image
+      resourceRef:
+        name: liberty-rest-app
+    - name: intermediate-image
+      resourceRef:
+        name: liberty-rest-app

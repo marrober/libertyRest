@@ -10,7 +10,7 @@ spec:
       default: 'false' 
   resources:
     inputs:
-      - name: builder-image
+      - name: intermediate-image
         type: image
     outputs:
       - name: output-image
@@ -33,10 +33,10 @@ spec:
         - '-c'
       args:
         - |-
-          echo "FROM $(resources.inputs.builder-image.url) as builder-image" > ext-dockerfile.gen
+          echo "FROM $(resources.inputs.intermediate-image.url) as intermediate-image" > ext-dockerfile.gen
           echo "FROM docker.io/openliberty/open-liberty as runtime-image" >> ext-dockerfile.gen
-          echo "COPY --from=builder-image /tmp/src/target/liberty-rest-app.war /config/apps/liberty-rest-app.war" >> ext-dockerfile.gen
-          echo "COPY --from=builder-image /tmp/src/src/main/liberty/config/server.xml /config/server.xml" >> ext-dockerfile.gen
+          echo "COPY --from=intermediate-image /tmp/src/target/liberty-rest-app.war /config/apps/liberty-rest-app.war" >> ext-dockerfile.gen
+          echo "COPY --from=intermediate-image /tmp/src/src/main/liberty/config/server.xml /config/server.xml" >> ext-dockerfile.gen
           echo "------------------------------"
           cat ext-dockerfile.gen
           echo "------------------------------"
@@ -98,4 +98,4 @@ spec:
       name: gen-source
     - name: pipeline-cache
       persistentVolumeClaim:
-        claimName: pipeline-task-cache-pvc 
+        claimName: pipeline-task-cache-pvc-2 

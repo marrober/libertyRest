@@ -14,7 +14,7 @@ spec:
     type: git
   - name: output-image
     type: image
-  - name: builder-image
+  - name: intermediate-image
     type: image
   tasks:
   - name: build
@@ -25,16 +25,16 @@ spec:
       outputs:
       - name: output-image
         resource: output-image
-      - name: builder-image
-        resource: builder-image
+      - name: intermediate-image
+        resource: intermediate-image
     taskRef:
       kind: Task
       name: build
   - name: create-runtime-image
     resources:
       inputs:
-      - name: builder-image
-        resource: builder-image
+      - name: intermediate-image
+        resource: intermediate-image
       outputs:
       - name: output-image
         resource: output-image
