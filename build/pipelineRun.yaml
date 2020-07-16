@@ -14,4 +14,4 @@ spec:
         name: liberty-rest-app
     - name: intermediate-image
       resourceRef:
-        name: liberty-rest-app
+        name: intermediate

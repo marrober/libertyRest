@@ -38,3 +38,14 @@ spec:
     port: 9080
   selector:
     app: liberty-rest-app
+---
+apiVersion: route.openshift.io/v1
+kind: Route
+metadata:
+  labels:
+    app: liberty-rest-app
+  name: liberty-rest-app-route
+spec:
+  to:
+    kind: Service
+    name: liberty-rest-app
