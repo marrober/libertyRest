@@ -4,7 +4,7 @@ metadata:
   creationTimestamp: "2020-06-26T14:11:45Z"
   generation: 1
   labels:
-    app.kubernetes.io/instance: petstore-from-git
+    app.kubernetes.io/instance: liberty-rest-app
     pipeline.openshift.io/type: kubernetes
   name: liberty-rest-app
   namespace: liberty-rest
@@ -12,9 +12,9 @@ spec:
   resources:
   - name: app-source
     type: git
-  - name: output-image
-    type: image
   - name: intermediate-image
+    type: image
+  - name: runtime-image
     type: image
   tasks:
   - name: build
@@ -23,8 +23,6 @@ spec:
       - name: source
         resource: app-source
       outputs:
-      - name: output-image
-        resource: output-image
       - name: intermediate-image
         resource: intermediate-image
     taskRef:
@@ -36,12 +34,31 @@ spec:
       - name: intermediate-image
         resource: intermediate-image
       outputs:
-      - name: output-image
-        resource: output-image
+      - name: runtime-image
+        resource: runtime-image
     taskRef:
       kind: Task
       name: create-runtime-image
     runAfter:
       - build
+  - name: deploy-image
+    resources:
+      inputs:
+      - name: intermediate-image
+        resource: intermediate-image
+      outputs:
+      - name: runtime-image
+        resource: runtime-image
+    params:
+      - name: ARGS
+        value: 
+          - get
+          - all
+    taskRef:
+      kind: ClusterTask
+      name: openshift-client
+    runAfter:
+      - create-runtime-image    
+
       
       

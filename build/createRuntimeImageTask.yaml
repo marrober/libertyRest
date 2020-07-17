@@ -13,7 +13,7 @@ spec:
       - name: intermediate-image
         type: image
     outputs:
-      - name: output-image
+      - name: runtime-image
         type: image
   steps :
     - name: view-images
@@ -54,7 +54,7 @@ spec:
         - '-f'
         - ext-dockerfile.gen
         - '-t'
-        - $(resources.outputs.output-image.url)
+        - $(resources.outputs.runtime-image.url)
         - .
       image: registry.redhat.io/rhel8/buildah
       resources: {}
@@ -82,8 +82,8 @@ spec:
         - buildah
         - push
         - '--tls-verify=$(params.TLSVERIFY)'
-        - $(resources.outputs.output-image.url)
-        - 'docker://$(resources.outputs.output-image.url)'
+        - $(resources.outputs.runtime-image.url)
+        - 'docker://$(resources.outputs.runtime-image.url)'
       image: registry.redhat.io/rhel8/buildah
       resources: {}
       securityContext:
@@ -98,4 +98,4 @@ spec:
       name: gen-source
     - name: pipeline-cache
       persistentVolumeClaim:
-        claimName: pipeline-task-cache-pvc-3
+        claimName: pipeline-task-cache-pvc-4

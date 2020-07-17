@@ -9,9 +9,9 @@ spec:
     - name: app-source
       resourceRef:
         name: liberty-rest-app-source-code
-    - name: output-image
-      resourceRef:
-        name: liberty-rest-app
     - name: intermediate-image
       resourceRef:
         name: intermediate
+    - name: runtime-image
+      resourceRef:
+        name: liberty-rest-app

@@ -29,8 +29,6 @@ spec:
       - name: source
         type: git
     outputs:
-      - name: output-image
-        type: image
       - name: intermediate-image
         type: image
   steps :
@@ -87,8 +85,8 @@ spec:
     - name: view-workspace
       command:
         - ls
-        - -al
-        - /workspace
+        - -alR
+        - /gen-source
       image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
       volumeMounts:
         - name: gen-source
@@ -132,4 +130,4 @@ spec:
       name: gen-source
     - name: pipeline-cache
       persistentVolumeClaim:
-        claimName: pipeline-task-cache-pvc-3
+        claimName: pipeline-task-cache-pvc-4
