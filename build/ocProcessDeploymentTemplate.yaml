@@ -4,15 +4,6 @@ metadata:
   name: oc-process-deployment-template
 spec:
   params:
-    - name: SCRIPT
-      default: oc $@
-      description: The OpenShift CLI arguments to run
-      type: string
-    - name: ARGS
-      default: 
-      - help
-      description: The OpenShift CLI arguments to run
-      type: array
     - name: TEMPLATE_FILE_NAME
       default: ""
       Description: Deployment template file
@@ -30,7 +21,9 @@ spec:
       Description: The image to be deployed
       type: string
   resources:
-      inputs:
+    inputs:
+      - name: source
+        type: git
       - name: runtime-image
         type: image
   steps:
@@ -38,23 +31,47 @@ spec:
       resources: {}
       command:
         - ls
-        - -alR
-        - /workspace/source
+        - -al
+        - /workspace/source/build/deploy-app-template.yaml
       image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
       volumeMounts:
         - name: deployment-files
           mountPath: /deployment-files
       workingDir: /deployment-files
-    - name: oc
-      resources: {}
-      script: $(params.SCRIPT)
+    - name: gen-oc-process-script
+      command:
+        - /bin/sh
+        - '-c'
       args:
-        - $(params.ARGS)
+        - |-
+          echo "oc process -f /workspace/source/build/deploy-app-template.yaml -p APP_NAME=jke-banking -p APP_GROUP=JKE -p APP_IMAGE=image-registry.openshift-image-registry.svc:5000/liberty-rest/temp > deployment-resources.yaml " > oc-process-cmd.sh
+          echo "Generated oc process script command"
+          chmod a+x oc-process-cmd.sh
+          ./oc-process-cmd.sh
       image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
       volumeMounts:
         - name: deployment-files
           mountPath: /deployment-files
       workingDir: /deployment-files
+    - name: oc-create-resources
+      resources: {}
+      command:
+        - oc
+        - create 
+        - '-f' 
+        - deployment-resources.yaml 
+      image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+      volumeMounts:
+        - name: deployment-files
+          mountPath: /deployment-files
+      workingDir: /deployment-files
+    - name: oc-get-resources
+      resources: {}
+      command:
+        - oc
+        - get 
+        - all 
+      image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
     - name: view-deployment-files
       resources: {}
       command:

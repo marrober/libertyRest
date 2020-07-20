@@ -6,6 +6,9 @@ spec:
   pipelineRef:
     name: jke-banking-app-deploy
   resources:
+    - name: app-source
+      resourceRef:
+        name: liberty-rest-app-source-code
     - name: runtime-image
       resourceRef:
         name: liberty-rest-app
