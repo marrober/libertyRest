@@ -1,7 +1,7 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
-  name: oc-process-deployment-temaplate
+  name: oc-process-deployment-template
 spec:
   params:
     - name: SCRIPT
@@ -14,21 +14,59 @@ spec:
       description: The OpenShift CLI arguments to run
       type: array
     - name: TEMPLATE_FILE_NAME
-
+      default: ""
+      Description: Deployment template file
+      type: string
     - name: APP_NAME
-
+      default: ""
+      Description: Name of the application to be deployed
+      type: string
     - name: APP_GROUP
-
+      default: ""
+      Description: Application grouping within the topology view of the OpenShift web UI
+      type: string
     - name: APP_IMAGE
-
+      default: ""
+      Description: The image to be deployed
+      type: string
   resources:
       inputs:
       - name: runtime-image
-        resource: runtime-image
+        type: image
   steps:
-    - args:
-        - $(params.ARGS)
-      image: 'image-registry.openshift-image-registry.svc:5000/openshift/cli:latest'
-      name: oc
+    - name: view-git-files
+      resources: {}
+      command:
+        - ls
+        - -alR
+        - /workspace/source
+      image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+      volumeMounts:
+        - name: deployment-files
+          mountPath: /deployment-files
+      workingDir: /deployment-files
+    - name: oc
       resources: {}
       script: $(params.SCRIPT)
+      args:
+        - $(params.ARGS)
+      image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+      volumeMounts:
+        - name: deployment-files
+          mountPath: /deployment-files
+      workingDir: /deployment-files
+    - name: view-deployment-files
+      resources: {}
+      command:
+        - ls
+        - -alR
+        - /deployment-files
+      image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+      volumeMounts:
+        - name: deployment-files
+          mountPath: /deployment-files
+      workingDir: /deployment-files
+  volumes:
+    - emptyDir: {}
+      name: deployment-files
+

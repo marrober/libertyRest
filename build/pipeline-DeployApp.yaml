@@ -1,0 +1,35 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  creationTimestamp: "2020-06-26T14:11:45Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/instance: jke-banking-app
+    pipeline.openshift.io/type: kubernetes
+  name: jke-banking-app-deploy
+  namespace: liberty-rest
+spec:
+  resources:
+    inputs:
+    - name: app-source
+      type: git
+    - name: runtime-image
+      type: image
+  tasks:
+  - name: deploy-image
+    resources:
+      inputs:
+      - name: runtime-image
+        resource: runtime-image
+    params:
+      - name: SCRIPT
+        value: |
+          #!/usr/bin/env bash
+          set -xe
+          "oc process -f /workspace/source/build/deploy-app-template.yaml -p APP_NAME=jke-banking -p APP_GROUP=JKE -p APP_IMAGE=image-registry.openshift-image-registry.svc:5000/liberty-rest/temp > processedDeployment.yaml"
+    taskRef:
+      kind: Task
+      name: oc-process-deployment-template
+
+      
+      

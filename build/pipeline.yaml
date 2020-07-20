@@ -44,9 +44,6 @@ spec:
   - name: deploy-image
     resources:
       inputs:
-      - name: intermediate-image
-        resource: intermediate-image
-      outputs:
       - name: runtime-image
         resource: runtime-image
     params:
@@ -55,8 +52,8 @@ spec:
           - get
           - all
     taskRef:
-      kind: ClusterTask
-      name: openshift-client
+      kind: Task
+      name: oc-process-deployment-template
     runAfter:
       - create-runtime-image    
 

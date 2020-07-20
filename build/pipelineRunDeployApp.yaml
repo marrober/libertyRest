@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: jke-banking-app-pr-
+spec:
+  pipelineRef:
+    name: jke-banking-app-deploy
+  resources:
+    - name: runtime-image
+      resourceRef:
+        name: liberty-rest-app

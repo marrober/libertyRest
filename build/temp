@@ -39,3 +39,38 @@
         - name: envparams
           mountPath: /env-params
       workingDir: /env-params
+
+ 
+
+
+
+
+
+
+  - name: deploy-image
+    resources:
+      inputs:
+      - name: runtime-image
+        resource: runtime-image
+    params:
+      - name: ARGS
+        value: 
+          - oc 
+          - process 
+          - '-f'
+          - deploy-app-template.yaml
+          - '-p=APP_NAME=liberty-rest-app'
+          - '-p=APP_GROUP=liberty' 
+          - '-p=APP_IMAGE=$(resources.inputs.runtime-image.url)' 
+          - '|'
+          - oc 
+          - create 
+          - '--save-config=true' 
+          - '-f' 
+          - '-' 
+    taskRef:
+      kind: ClusterTask
+      name: openshift-client
+    runAfter:
+      - create-runtime-image
+
