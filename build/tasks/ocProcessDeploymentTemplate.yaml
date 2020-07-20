@@ -86,4 +86,3 @@ spec:
   volumes:
     - emptyDir: {}
       name: deployment-files
-

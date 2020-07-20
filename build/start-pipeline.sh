@@ -1,1 +1,0 @@
-tkn pipelinerun logs $(tkn pipeline start liberty-rest-app --resource app-source=liberty-rest-app-source-code --resource output-image=liberty-rest-app --resource intermediate-image=intermediate | grep started | cut -d ' ' -f 3) -f -n liberty-rest
