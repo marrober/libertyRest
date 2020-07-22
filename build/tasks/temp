@@ -1,0 +1,12 @@
+        - echo "----------------------------------------------" > clear-cmd.sh
+        - echo "echo $(params.appName)" >> clear-cmd.sh
+        - echo "----------------------------------------------" >> clear-cmd.sh
+        - echo "oc get all -l app=$(params.appName)" >> clear-cmd.sh
+        - echo "----------------------------------------------" >> clear-cmd.sh
+        - echo "oc delete all -l app=$(params.appName)" >> clear-cmd.sh
+        - echo "----------------------------------------------" >> clear-cmd.sh
+        - echo "oc get all -l app=$(params.appName)" >> clear-cmd.sh
+        - echo "Generated script to clear resources ready for new deployment"
+        - echo "------------------------------------------------------------"
+        - cat clear-cmd.sh
+        - echo "------------------------------------------------------------"

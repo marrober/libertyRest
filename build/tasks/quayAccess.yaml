@@ -1,0 +1,34 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: quay-access
+spec:
+  steps:
+    - name: quay-login
+      command:
+        - buildah
+        - login
+        - '--username'
+        - marrober+api_access
+        - '--password'
+        - OFECNO8ZLRT2WPGEO5D73CQR29JK9402PQ3687NM3SUAYCTBMYUIJQZXSPD4VKK5
+        - quay.io
+      image: registry.redhat.io/rhel8/buildah
+      volumeMounts:
+        - name: quay
+          mountPath: /quay
+      workingDir: /quay
+    - name: quay-whoami
+      command:
+        - buildah
+        - login
+        - '--get-login'
+        - quay.io
+      image: registry.redhat.io/rhel8/buildah
+      volumeMounts:
+        - name: quay
+          mountPath: /quay
+      workingDir: /quay
+  volumes:
+    - emptyDir: {}
+      name: quay

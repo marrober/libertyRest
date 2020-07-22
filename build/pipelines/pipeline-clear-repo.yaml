@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  creationTimestamp: "2020-06-26T14:11:45Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/instance: liberty-rest-app
+    pipeline.openshift.io/type: kubernetes
+  name: liberty-rest-app-clear-repo
+  namespace: liberty-rest
+spec:
+  tasks:
+  - name: clear-buildah-repo
+    taskRef:
+      kind: Task
+      name: clear-buildah-repo
+   
+
+      
+      

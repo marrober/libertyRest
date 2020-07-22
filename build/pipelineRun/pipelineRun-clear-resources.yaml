@@ -1,0 +1,7 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: liberty-rest-app-clear-resources-run-pr-
+spec:
+  pipelineRef:
+    name: liberty-rest-app-clear-resources

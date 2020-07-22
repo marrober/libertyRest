@@ -82,10 +82,10 @@ spec:
       volumeMounts:
         - name: gen-source
           mountPath: /gen-source
-    - name: view-workspace
+    - name: view-gen-source
       command:
         - ls
-        - -alR
+        - -al
         - /gen-source
       image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
       volumeMounts:
@@ -130,4 +130,4 @@ spec:
       name: gen-source
     - name: pipeline-cache
       persistentVolumeClaim:
-        claimName: pipeline-task-cache-pvc-4
+        claimName: pipeline-task-cache-pvc-3

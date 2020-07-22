@@ -9,6 +9,16 @@ metadata:
   name: liberty-rest-app
   namespace: liberty-rest
 spec:
+  params:
+  - name: templateFileName
+    type: string
+    default: build/template/deploy-app-template.yaml
+  - name: appName
+    type: string
+    default: liberty-rest
+  - name: appGroup
+    type: string
+    default: Liberty
   resources:
   - name: app-source
     type: git
@@ -41,21 +51,51 @@ spec:
       name: create-runtime-image
     runAfter:
       - build
+  - name: clear-resources
+    params:
+      - name: appName
+        value: $(params.appName)
+    taskRef:
+      kind: Task
+      name: clear-resources
+    runAfter:
+      - build
   - name: deploy-image
     resources:
       inputs:
+      - name: source
+        resource: app-source
       - name: runtime-image
         resource: runtime-image
     params:
-      - name: ARGS
-        value: 
-          - get
-          - all
+      - name: templateFileName
+        value: $(params.templateFileName)
+      - name: appName
+        value: $(params.appName)
+      - name: appGroup
+        value: $(params.appGroup)
     taskRef:
       kind: Task
       name: oc-process-deployment-template
     runAfter:
-      - create-runtime-image    
+      - create-runtime-image 
+      - clear-resources
+  - name: clear-buildah-repo
+    taskRef:
+      kind: Task
+      name: clear-buildah-repo
+    runAfter:
+      - create-runtime-image 
+  - name: test
+    params:
+      - name: appName
+        value: $(params.appName)
+    taskRef:
+      kind: Task
+      name: test-tasks
+    runAfter:
+      - deploy-image 
+   
 
       
       
