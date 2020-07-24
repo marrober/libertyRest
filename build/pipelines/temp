@@ -1,0 +1,19 @@
+taken from the bottom of pipeline.yaml
+
+
+
+  - name: clear-buildah-repo
+    taskRef:
+      kind: Task
+      name: clear-buildah-repo
+    runAfter:
+      - create-runtime-image 
+  - name: test
+    params:
+      - name: appName
+        value: $(params.appName)
+    taskRef:
+      kind: Task
+      name: test-tasks
+    runAfter:
+      - deploy-image 

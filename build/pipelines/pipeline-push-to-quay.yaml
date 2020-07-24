@@ -1,0 +1,44 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  creationTimestamp: "2020-06-26T14:11:45Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/instance: liberty-rest-app
+    pipeline.openshift.io/type: kubernetes
+  name: liberty-rest-push-image-to-quay
+  namespace: liberty-rest
+spec:
+  params:
+  - name: quay-io-account
+    type: string
+    default: "marrober"
+  - name: quay-io-repository
+    type: string
+    default: "liberty-rest"
+  - name: quay-io-image-tag-name
+    type: string
+    default: "latest"
+  resources:
+  - name: runtime-image
+    type: image
+  tasks:
+  - name: push-image-to-quay
+    params:
+      - name: quay-io-account
+        value: $(params.quay-io-account)
+      - name: quay-io-repository
+        value: $(params.quay-io-repository)
+      - name: quay-io-image-tag-name
+        value: $(params.quay-io-image-tag-name)
+    resources:
+      inputs:
+      - name: runtime-image
+        resource: runtime-image
+    taskRef:
+      kind: Task
+      name: push-image-to-quay
+   
+
+      
+      

@@ -14,13 +14,13 @@ spec:
     type: string
     default: liberty-rest
   tasks:
-  - name: test-tasks
+  - name: test
     params:
       - name: appName
         value: $(params.appName)
     taskRef:
       kind: Task
-      name: test-tasks
+      name: test
    
 
       

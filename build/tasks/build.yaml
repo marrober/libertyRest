@@ -74,23 +74,6 @@ spec:
         - name: envparams
           mountPath: /env-params
       workingDir: /workspace/source
-    - name: view-docker-file
-      command:
-        - cat
-        - /gen-source/Dockerfile.gen
-      image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
-      volumeMounts:
-        - name: gen-source
-          mountPath: /gen-source
-    - name: view-gen-source
-      command:
-        - ls
-        - -al
-        - /gen-source
-      image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
-      volumeMounts:
-        - name: gen-source
-          mountPath: /gen-source
     - name: build
       command:
         - buildah
@@ -130,4 +113,4 @@ spec:
       name: gen-source
     - name: pipeline-cache
       persistentVolumeClaim:
-        claimName: pipeline-task-cache-pvc-3
+        claimName: pipeline-task-cache-pvc-4

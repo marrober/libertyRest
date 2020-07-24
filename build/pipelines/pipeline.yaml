@@ -19,6 +19,15 @@ spec:
   - name: appGroup
     type: string
     default: Liberty
+  - name: quay-io-account
+    type: string
+    default: "marrober"
+  - name: quay-io-repository
+    type: string
+    default: "liberty-rest"
+  - name: quay-io-image-tag-name
+    type: string
+    default: "latest"
   resources:
   - name: app-source
     type: git
@@ -80,22 +89,38 @@ spec:
     runAfter:
       - create-runtime-image 
       - clear-resources
-  - name: clear-buildah-repo
-    taskRef:
-      kind: Task
-      name: clear-buildah-repo
-    runAfter:
-      - create-runtime-image 
   - name: test
     params:
       - name: appName
         value: $(params.appName)
     taskRef:
       kind: Task
-      name: test-tasks
+      name: test
     runAfter:
       - deploy-image 
-   
+  - name: push-image-to-quay
+    params:
+      - name: quay-io-account
+        value: $(params.quay-io-account)
+      - name: quay-io-repository
+        value: $(params.quay-io-repository)
+      - name: quay-io-image-tag-name
+        value: $(params.quay-io-image-tag-name)
+    resources:
+      inputs:
+      - name: runtime-image
+        resource: runtime-image
+    taskRef:
+      kind: Task
+      name: push-image-to-quay
+    runAfter:
+      - test
+  - name: clear-buildah-repo
+    taskRef:
+      kind: Task
+      name: clear-buildah-repo
+    runAfter:
+      - push-image-to-quay 
 
       
       
