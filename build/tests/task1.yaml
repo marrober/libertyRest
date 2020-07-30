@@ -1,0 +1,43 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: task1
+spec:
+  steps :
+    - name: create-file
+      command:
+        - /bin/sh
+        - '-c'
+      args:
+        - |-
+          echo "This is line 1" > /workspace/env-file
+          echo "This is line 2" >> /workspace/env-file
+          echo "Generated Env file"
+          echo "------------------------------"
+          cat env-file
+          echo "------------------------------"
+      image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+    - name: list-file
+      command:
+        - ls
+        - '-al'
+      image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+      workingDir: /workspace
+    - name: df-workspace
+      command:
+        - df
+        - '-k'
+      image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
+      workingDir: /workspace
+    - name: df-empty-dir
+      command:
+        - df
+        - '-k'
+      image: registry.redhat.io/rhel8/buildah
+      volumeMounts:
+        - name: envparams
+          mountPath: /env-params
+      workingDir: /env-params
+  volumes:
+    - emptyDir: {}
+      name: envparams

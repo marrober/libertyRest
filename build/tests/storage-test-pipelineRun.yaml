@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: storage-test-pr-
+spec:
+  pipelineRef:
+    name: storage-test
+  resources:
+    - name: app-source
+      resourceRef:
+        name: liberty-rest-app-source-code

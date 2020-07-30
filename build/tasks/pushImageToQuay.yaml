@@ -67,4 +67,4 @@ spec:
         secretName: quay-auth-secret
     - name: pipeline-cache
       persistentVolumeClaim:
-        claimName: pipeline-task-cache-pvc-4
+        claimName: pipeline-task-cache-pvc-1

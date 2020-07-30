@@ -15,3 +15,16 @@ spec:
     - name: runtime-image
       resourceRef:
         name: liberty-rest-app
+  params:
+    - name: templateFileName
+      value: build/template/deploy-app-template.yaml
+    - name: appName
+      value: liberty-rest
+    - name: appGroup
+      value: Liberty
+    - name: quay-io-account
+      value: "marrober"
+    - name: quay-io-repository
+      value: "liberty-rest"
+    - name: quay-io-image-tag-name
+      value: "latest"
