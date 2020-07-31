@@ -29,6 +29,10 @@ spec:
       params:
         - name: title
           value: $(params.pull_request_title)
+        - name: number 
+          value: $(params.pull_request_number
+        - name: user
+          value: $(params.pull_requester)
       resources:
       - name: app-source
         resourceSpec:
@@ -38,8 +42,3 @@ spec:
             value: $(params.gitrevision)
           - name: url
             value: $(params.gitrepositoryurl)
-
-##          - name: number 
-##            value: $(params.pull_request_number)
-##          - name: user
-##            value: $(params.pull_requester)
