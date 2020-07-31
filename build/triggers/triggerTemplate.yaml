@@ -11,10 +11,6 @@ spec:
     description: The git repository url
   - name: pull_request_title
     description: The title of the pull request   
-  - name: pull_request_number
-    description: The number of the pull request
-  - name: pull_requester
-    description: The login ID of the user submitting the pull request 
   - name: service-account
     description: The ServiceAccount under which to run the Pipeline.    
   resourcetemplates:
@@ -27,6 +23,8 @@ spec:
       pipelineRef:
         name: storage-test
       params:
+        - name: title
+          value: $(params.pull_request_title)
       resources:
       - name: app-source
         resourceSpec:
@@ -36,9 +34,3 @@ spec:
             value: $(params.gitrevision)
           - name: url
             value: $(params.gitrepositoryurl)
-          - name: title
-            value: $(params.pull_request_title)
-          - name: number 
-            value: $(params.pull_request_number)
-          - name: user
-            value: $(params.pull_requester)

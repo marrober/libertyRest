@@ -8,20 +8,14 @@ spec:
       - name: source
         type: git
   params:
-    - name: revision
-      description: The GIT revision
-      type: string  
-    - name: url
-      description: The GIT repository URL
-      type: string  
-    - name: title
+##    - name: revision
+##      description: The GIT revision
+##      type: string  
+##    - name: url
+##      description: The GIT repository URL
+##      type: string  
+    - name: pullRequestTitle
       description: The title of the pull request
-      type: string  
-    - name: number
-      description: The pull request number
-      type: string  
-    - name: user
-      description: The ID of the user submitting the pull request
       type: string  
   steps:
     - name: pr-information
@@ -32,10 +26,7 @@ spec:
         - |-
           echo "--------------------------------------------------------"
           echo " Pull request information .............................."
-          echo " Title     : $(params.title)"
-          echo " Number    : $(params.number)"
-          echo " Submitter : $(params.user)"
-          echo " Git Repo  : $(params.url)"
+          echo " PR Title : $(params.pullRequestTitle)" 
           echo "--------------------------------------------------------"
       image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
     - name: list-file
