@@ -21,7 +21,7 @@ spec:
   tasks:
   - name: task2
     params:
-      - name: PullRequestTitle
+      - name: pullRequestTitle
         value: $(params.title)      
     resources:
       inputs:
