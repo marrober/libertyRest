@@ -14,9 +14,15 @@ spec:
         - '-al'
       image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
       workingDir: /workspace/source
-    - name: cat-file
+    - name: cat-task2-yaml
       command:
         - cat
         - task2.yaml
       image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
       workingDir: /workspace/source/build/tests
+    - name: cat-test-file
+      command:
+        - cat
+        - test-file
+      image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
+      workingDir: /workspace/source    
