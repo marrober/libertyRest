@@ -20,6 +20,9 @@ spec:
 ##    type: string
   tasks:
   - name: task2
+    params:
+      - name: PullRequestTitle
+        value: $(params.title)      
     resources:
       inputs:
       - name: source

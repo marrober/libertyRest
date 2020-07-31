@@ -14,9 +14,9 @@ spec:
 ##    - name: url
 ##      description: The GIT repository URL
 ##      type: string  
-##    - name: title
-##      description: The title of the pull request
-##      type: string  
+    - name: pullRequestTitle
+      description: The title of the pull request
+      type: string  
 ##    - name: number
 ##      description: The pull request number
 ##      type: string  
@@ -32,6 +32,7 @@ spec:
         - |-
           echo "--------------------------------------------------------"
           echo " Pull request information .............................."
+          echo "PR Title : $(params.pullRequestTitle)"
           echo "--------------------------------------------------------"
       image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
     - name: list-file
