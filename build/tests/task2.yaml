@@ -17,6 +17,9 @@ spec:
     - name: pullRequestTitle
       description: The title of the pull request
       type: string  
+    - name: action
+      description : The pull request action
+      type: string
   steps:
     - name: pr-information
       command:
@@ -28,6 +31,7 @@ spec:
           echo " Git Repo     : $(params.url)"
           echo " Git revision : $(params.revision)"
           echo " PR Title     : $(params.pullRequestTitle)" 
+          echo " PR Action    : $(params.action)"
           echo "--------------------------------------------------------"
       image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
     - name: list-file
