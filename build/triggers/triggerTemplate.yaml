@@ -25,6 +25,10 @@ spec:
       params:
         - name: title
           value: $(params.pull_request_title)
+        - name: revision
+          value: $(params.gitrevision)
+        - name: url
+          value: $(params.gitrepositoryurl)
       resources:
       - name: app-source
         resourceSpec:

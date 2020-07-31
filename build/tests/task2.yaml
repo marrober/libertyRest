@@ -8,12 +8,12 @@ spec:
       - name: source
         type: git
   params:
-##    - name: revision
-##      description: The GIT revision
-##      type: string  
-##    - name: url
-##      description: The GIT repository URL
-##      type: string  
+    - name: revision
+      description: The GIT revision
+      type: string  
+    - name: url
+      description: The GIT repository URL
+      type: string  
     - name: pullRequestTitle
       description: The title of the pull request
       type: string  
@@ -25,8 +25,9 @@ spec:
       args:
         - |-
           echo "--------------------------------------------------------"
-          echo " Pull request information .............................."
-          echo " PR Title : $(params.pullRequestTitle)" 
+          echo " Git Repo     : $(params.url)"
+          echo " Git revision : $(params.revision)"
+          echo " PR Title     : $(params.pullRequestTitle)" 
           echo "--------------------------------------------------------"
       image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
     - name: list-file

@@ -8,10 +8,10 @@ spec:
   - name: app-source
     type: git
   params:
-##  - name: revision
-##    type: string
-##  - name: url
-##    type: string
+    - name: revision
+      type: string
+    - name: url
+      type: string
     - name: title
       type: string
   tasks:
@@ -19,6 +19,10 @@ spec:
     params:
       - name: pullRequestTitle
         value: $(params.title)   
+      - name: revision
+        value: $(params.revision)
+      - name: url
+        value: $(params.url)
     resources:
       inputs:
       - name: source
