@@ -27,6 +27,8 @@ spec:
       pipelineRef:
         name: storage-test
       params:
+        - name: title
+          value: $(params.pull_request_title)
       resources:
       - name: app-source
         resourceSpec:
@@ -36,9 +38,8 @@ spec:
             value: $(params.gitrevision)
           - name: url
             value: $(params.gitrepositoryurl)
-          - name: title
-            value: $(params.pull_request_title)
-          - name: number 
-            value: $(params.pull_request_number)
-          - name: user
-            value: $(params.pull_requester)
+
+##          - name: number 
+##            value: $(params.pull_request_number)
+##          - name: user
+##            value: $(params.pull_requester)

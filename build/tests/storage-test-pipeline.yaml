@@ -8,16 +8,16 @@ spec:
   - name: app-source
     type: git
   params:
-  - name: revision
-    type: string
-  - name: url
-    type: string
-  - name: title
-    type: string
-  - name: number 
-    type: string
-  - name: user
-    type: string
+##  - name: revision
+##    type: string
+##  - name: url
+##    type: string
+    - name: title
+      type: string
+##  - name: number 
+##    type: string
+##  - name: user
+##    type: string
   tasks:
   - name: task2
     resources:
