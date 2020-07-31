@@ -32,7 +32,7 @@ spec:
         - |-
           echo "--------------------------------------------------------"
           echo " Pull request information .............................."
-          echo " PR Title     : $(params.pullRequestTitle)"
+          echo " PR Title     : $(params.pullRequestTitle)" 
           echo " PR Submitter : $(params.user)"
           echo "--------------------------------------------------------"
       image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
