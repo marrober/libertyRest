@@ -7,8 +7,12 @@ spec:
   - name: gitrevision
     value: $(body.pull_request.head.sha)
   - name: gitrepositoryurl
-    value: $(body.repository.url)
-  - name: contenttype
-    value: $(header.Content-Type)
+    value: $(body.repository.html_url)
+  - name: pull_request_title
+    value: $(body.pull_request.title)
+  - name: pull_request_number
+    value: $(body.number)
+  - name: pull_requester
+    value: $(body.pull_request.user.login)
   - name: service-account
     value: pipeline    
