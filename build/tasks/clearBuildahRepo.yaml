@@ -42,4 +42,4 @@ spec:
   volumes:
     - name: pipeline-cache
       persistentVolumeClaim:
-        claimName: pipeline-task-cache-pvc-1
+        claimName: pipeline-task-cache-pvc
