@@ -12,7 +12,7 @@ spec:
   params:
   - name: appName
     type: string
-    default: liberty-rest
+    value: liberty-rest
   tasks:
   - name: test
     params:
