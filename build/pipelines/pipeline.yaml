@@ -28,7 +28,7 @@ spec:
     default: Liberty
   - name: quay-io-account
     type: string
-    default: "marrober"
+    default: ""
   - name: quay-io-repository
     type: string
     default: "liberty-rest"

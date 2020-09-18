@@ -1,1 +1,0 @@
-/opt/java/openjdk/jreOpenJDK Runtime Environment

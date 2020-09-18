@@ -1,3 +1,5 @@
+oc create -f namespace/namespace.yaml
+oc project liberty-rest
 oc create --save-config=true -f image-streams/imageStream-liberty-rest-app.yaml 
 oc create --save-config=true -f persistentVolumes/task-cache-pvc.yaml 
 oc create --save-config=true -f resources/imageStreamResource-intermediate.yaml 
