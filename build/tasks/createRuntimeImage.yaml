@@ -49,6 +49,7 @@ spec:
       command:
         - buildah
         - bud
+        - --storage-driver=vfs
         - '--tls-verify=$(params.TLSVERIFY)'
         - '--layers'
         - '-f'

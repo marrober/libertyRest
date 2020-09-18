@@ -1,0 +1,26 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  labels:
+    app.kubernetes.io/instance: liberty-rest-app
+    pipeline.openshift.io/type: kubernetes
+  name: liberty-rest-app-test-3
+  namespace: liberty-rest-dev
+spec:
+  params:
+  tasks:
+  - name: test-3
+    params:
+      - name: pipelineRunName
+        value: $(context.pipelineRun.name)
+      - name: pipelineName
+        value: $(context.pipeline.name)
+      - name: pipelineRunUid
+        value: $(context.pipelineRun.uid)
+    taskRef:
+      kind: Task
+      name: test-3
+   
+
+      
+      

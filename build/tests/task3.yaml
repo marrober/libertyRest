@@ -1,0 +1,28 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: test-3
+spec:
+  params:
+    - name: pipelineRunName
+      type: string
+    - name: pipelineName
+      type: string 
+    - name: pipelineRunUid
+      type: string
+  steps :
+    - name: create-file
+      command:
+        - /bin/sh
+        - '-c'
+      args:
+        - |-
+          echo "Context pipelineRun name : $(params.pipelineRunName)" > /workspace/env-file
+          echo "Context pipelineRun uid  : $(params.pipelineRunUid)" >> /workspace/env-file
+          echo "Context pipeline name : $(params.pipelineName)" >> /workspace/env-file
+          echo "Context taskRun Name : $(context.taskRun.name)" >> /workspace/env-file
+          echo "Context taskRun UID  : $(context.taskRun.uid)" >> /workspace/env-file
+          echo "------------------------------"
+          cat env-file
+          echo "------------------------------"
+      image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest

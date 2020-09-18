@@ -19,12 +19,39 @@ spec:
   - apiVersion: tekton.dev/v1beta1
     kind: PipelineRun
     metadata:
-      generateName: storage-test-pr-tr-
+      generateName: liberty-rest-app-run-pr-tr-
     spec:
       serviceAccountName: $(params.service-account)
       pipelineRef:
-        name: storage-test
+        name: liberty-rest-app
+      resources:
+        - name: app-source
+          resourceSpec:
+            type: git
+            params:
+            - name: revision
+              value: $(params.gitrevision)
+            - name: url
+              value: $(params.gitrepositoryurl)
+        - name: intermediate-image
+          resourceRef:
+            name: intermediate
+        - name: runtime-image
+          resourceRef:
+            name: liberty-rest-app
       params:
+        - name: templateFileName
+          value: build/template/deploy-app-template.yaml
+        - name: appName
+          value: liberty-rest
+        - name: appGroup
+          value: Liberty
+        - name: quay-io-account
+          value: "mrobertsredhat"
+        - name: quay-io-repository
+          value: "liberty-rest"
+        - name: quay-io-image-tag-name
+          value: "latest"
         - name: title
           value: $(params.pull_request_title)
         - name: revision
@@ -33,12 +60,3 @@ spec:
           value: $(params.gitrepositoryurl)
         - name: action
           value: $(params.pull_request_action)
-      resources:
-      - name: app-source
-        resourceSpec:
-          type: git
-          params:
-          - name: revision
-            value: $(params.gitrevision)
-          - name: url
-            value: $(params.gitrepositoryurl)
