@@ -15,8 +15,6 @@ spec:
         value: $(context.pipelineRun.name)
       - name: pipelineName
         value: $(context.pipeline.name)
-      - name: pipelineRunUid
-        value: $(context.pipelineRun.uid)
     taskRef:
       kind: Task
       name: test-3

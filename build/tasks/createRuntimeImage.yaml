@@ -3,11 +3,11 @@ kind: Task
 metadata:
   name: create-runtime-image
 spec:
-  params: 
+  params:
     - name: TLSVERIFY
-      description: Verify the TLS on the registry endpoint 
+      description: Verify the TLS on the registry endpoint
       type: string
-      default: 'false' 
+      default: 'false'
   resources:
     inputs:
       - name: intermediate-image
@@ -37,6 +37,7 @@ spec:
           echo "FROM docker.io/openliberty/open-liberty as runtime-image" >> ext-dockerfile.gen
           echo "COPY --from=intermediate-image /tmp/src/target/liberty-rest-app.war /config/apps/liberty-rest-app.war" >> ext-dockerfile.gen
           echo "COPY --from=intermediate-image /tmp/src/src/main/liberty/config/server.xml /config/server.xml" >> ext-dockerfile.gen
+          echo "LABEL pipelineRun=$(params.pipelineRunName)" >> ext-dockerfile.gen
           echo "------------------------------"
           cat ext-dockerfile.gen
           echo "------------------------------"
@@ -49,9 +50,10 @@ spec:
       command:
         - buildah
         - bud
-        - --storage-driver=vfs
         - '--tls-verify=$(params.TLSVERIFY)'
         - '--layers'
+        - '--annotation'
+        - 'pipelineRun=$(params.pipelineRunName)'
         - '-f'
         - ext-dockerfile.gen
         - '-t'
@@ -99,4 +101,4 @@ spec:
       name: gen-source
     - name: pipeline-cache
       persistentVolumeClaim:
-        claimName: pipeline-task-cache-pvc
+        claimName: pipeline-task-cache-pvc-2

@@ -87,7 +87,7 @@ spec:
       kind: Task
       name: oc-process-deployment-template
     runAfter:
-      - create-runtime-image 
+      - create-runtime-image
       - clear-resources
   - name: push-image-to-quay
     params:
@@ -111,7 +111,4 @@ spec:
       kind: Task
       name: clear-buildah-repo
     runAfter:
-      - push-image-to-quay 
-
-      
-      
+      - push-image-to-quay

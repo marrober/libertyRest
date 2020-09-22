@@ -15,15 +15,15 @@ spec:
     - name: MAVEN_MIRROR_URL
       description: The base URL of a mirror used for retrieving artifacts
       type: string
-      default: ''   
+      default: ''
     - name: MAVEN_CLEAR_REPO
       description: Remove the Maven repository after the artifact is built
       type: string
-      default: 'false'   
+      default: 'false'
     - name: TLSVERIFY
-      description: Verify the TLS on the registry endpoint 
+      description: Verify the TLS on the registry endpoint
       type: string
-      default: 'false' 
+      default: 'false'
   resources:
     inputs:
       - name: source
@@ -78,8 +78,8 @@ spec:
       command:
         - buildah
         - bud
-        - --storage-driver=vfs
         - '--tls-verify=$(params.TLSVERIFY)'
+        - '--storage-driver=vfs'
         - '--layers'
         - '-f'
         - /gen-source/Dockerfile.gen
@@ -96,10 +96,23 @@ spec:
         - name: gen-source
           mountPath: /gen-source
       workingDir: /gen-source
+    - name: view-content
+      command:
+        - ls
+        - -alR
+      image: registry.redhat.io/rhel8/buildah
+      resources: {}
+      securityContext:
+        privileged: true
+      volumeMounts:
+        - name: pipeline-cache
+          mountPath: /var/lib/containers
+      workingDir: /gen-source
     - name: view-images
       command:
         - buildah
         - images
+        - '--storage-driver=vfs'
       image: registry.redhat.io/rhel8/buildah
       resources: {}
       securityContext:
@@ -114,4 +127,4 @@ spec:
       name: gen-source
     - name: pipeline-cache
       persistentVolumeClaim:
-        claimName: pipeline-task-cache-pvc
+        claimName: pipeline-task-cache-pvc-2
