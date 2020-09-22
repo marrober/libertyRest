@@ -37,7 +37,6 @@ spec:
           echo "FROM docker.io/openliberty/open-liberty as runtime-image" >> ext-dockerfile.gen
           echo "COPY --from=intermediate-image /tmp/src/target/liberty-rest-app.war /config/apps/liberty-rest-app.war" >> ext-dockerfile.gen
           echo "COPY --from=intermediate-image /tmp/src/src/main/liberty/config/server.xml /config/server.xml" >> ext-dockerfile.gen
-          echo "LABEL pipelineRun=$(params.pipelineRunName)" >> ext-dockerfile.gen
           echo "------------------------------"
           cat ext-dockerfile.gen
           echo "------------------------------"
