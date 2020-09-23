@@ -20,7 +20,7 @@ spec:
       description: The tag to use to identify the image.
       type: string
       default: "latest"
-  steps:  
+  steps:
     - name: buildah-tag-image
       command:
         - buildah
@@ -54,10 +54,10 @@ spec:
       image: registry.redhat.io/rhel8/buildah
       securityContext:
         privileged: true
-      volumeMounts:    
+      volumeMounts:
         - name: quay-auth-secret
           mountPath: /etc/secret-volume
-          readOnly: true 
+          readOnly: true
         - name: pipeline-cache
           mountPath: /var/lib/containers
       workingDir: /quay
@@ -67,4 +67,4 @@ spec:
         secretName: quay-auth-secret
     - name: pipeline-cache
       persistentVolumeClaim:
-        claimName: pipeline-task-cache-pvc-2
+        claimName: pipeline-task-cache-pvc-3

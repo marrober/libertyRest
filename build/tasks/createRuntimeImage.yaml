@@ -20,6 +20,7 @@ spec:
       command:
         - buildah
         - images
+        - '--storage-driver=vfs'
       image: registry.redhat.io/rhel8/buildah
       resources: {}
       securityContext:
@@ -50,9 +51,8 @@ spec:
         - buildah
         - bud
         - '--tls-verify=$(params.TLSVERIFY)'
+        - '--storage-driver=vfs'
         - '--layers'
-        - '--annotation'
-        - 'pipelineRun=$(params.pipelineRunName)'
         - '-f'
         - ext-dockerfile.gen
         - '-t'
@@ -72,6 +72,7 @@ spec:
       command:
         - buildah
         - images
+        - '--storage-driver=vfs'
       image: registry.redhat.io/rhel8/buildah
       resources: {}
       securityContext:
@@ -83,6 +84,7 @@ spec:
       command:
         - buildah
         - push
+        - '--storage-driver=vfs'
         - '--tls-verify=$(params.TLSVERIFY)'
         - $(resources.outputs.runtime-image.url)
         - 'docker://$(resources.outputs.runtime-image.url)'
@@ -100,4 +102,4 @@ spec:
       name: gen-source
     - name: pipeline-cache
       persistentVolumeClaim:
-        claimName: pipeline-task-cache-pvc-2
+        claimName: pipeline-task-cache-pvc-3
