@@ -25,6 +25,7 @@ spec:
       command:
         - buildah
         - tag
+        - '--storage-driver=vfs'
         - $(resources.inputs.runtime-image.url)
         - quay.io/$(params.quay-io-account)/$(params.quay-io-repository):$(params.quay-io-image-tag-name)
       image: registry.redhat.io/rhel8/buildah
@@ -38,6 +39,7 @@ spec:
       command:
         - buildah
         - images
+        - '--storage-driver=vfs'
       image: registry.redhat.io/rhel8/buildah
       securityContext:
         privileged: true
@@ -48,6 +50,7 @@ spec:
       command:
         - buildah
         - push
+        - '--storage-driver=vfs'
         - '--authfile'
         - /etc/secret-volume/.dockerconfigjson
         - quay.io/$(params.quay-io-account)/$(params.quay-io-repository):$(params.quay-io-image-tag-name)
@@ -67,4 +70,4 @@ spec:
         secretName: quay-auth-secret
     - name: pipeline-cache
       persistentVolumeClaim:
-        claimName: pipeline-task-cache-pvc-3
+        claimName: pipeline-task-cache-pvc-1

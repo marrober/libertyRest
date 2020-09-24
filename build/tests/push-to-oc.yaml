@@ -1,10 +1,19 @@
 apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
-  name: clear-buildah-repo
+  name: create-runtime-image-test
 spec:
+  params:
+    - name: TLSVERIFY
+      description: Verify the TLS on the registry endpoint
+      type: string
+      default: 'false'
+  resources:
+    outputs:
+      - name: runtime-image
+        type: image
   steps :
-    - name: buildah-list-images
+    - name: list-images
       command:
         - buildah
         - images
@@ -16,25 +25,14 @@ spec:
       volumeMounts:
         - name: pipeline-cache
           mountPath: /var/lib/containers
-    - name: buildah-remove-images
+    - name: push-image-to-openshift
       command:
         - buildah
-        - rmi
-        - '-a'
-        - '-f'
+        - push
         - '--storage-driver=vfs'
-      image: registry.redhat.io/rhel8/buildah
-      resources: {}
-      securityContext:
-        privileged: true
-      volumeMounts:
-        - name: pipeline-cache
-          mountPath: /var/lib/containers
-    - name: buildah-validate-images
-      command:
-        - buildah
-        - images
-        - '--storage-driver=vfs'
+        - '--tls-verify=$(params.TLSVERIFY)'
+        - $(resources.outputs.runtime-image.url)
+        - 'docker://$(resources.outputs.runtime-image.url)'
       image: registry.redhat.io/rhel8/buildah
       resources: {}
       securityContext:
@@ -43,6 +41,10 @@ spec:
         - name: pipeline-cache
           mountPath: /var/lib/containers
   volumes:
+    - emptyDir: {}
+      name: envparams
+    - emptyDir: {}
+      name: gen-source
     - name: pipeline-cache
       persistentVolumeClaim:
         claimName: pipeline-task-cache-pvc-1

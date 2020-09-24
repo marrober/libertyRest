@@ -96,31 +96,6 @@ spec:
         - name: gen-source
           mountPath: /gen-source
       workingDir: /gen-source
-    - name: view-content
-      command:
-        - ls
-        - -alR
-      image: registry.redhat.io/rhel8/buildah
-      resources: {}
-      securityContext:
-        privileged: true
-      volumeMounts:
-        - name: pipeline-cache
-          mountPath: /var/lib/containers
-      workingDir: /var/lib/containers
-    - name: view-space-left
-      command:
-        - df
-        - -k
-        - /var/lib/containers
-      image: registry.redhat.io/rhel8/buildah
-      resources: {}
-      securityContext:
-        privileged: true
-      volumeMounts:
-        - name: pipeline-cache
-          mountPath: /var/lib/containers
-      workingDir: /var/lib/containers
     - name: view-images
       command:
         - buildah
@@ -140,4 +115,4 @@ spec:
       name: gen-source
     - name: pipeline-cache
       persistentVolumeClaim:
-        claimName: pipeline-task-cache-pvc-3
+        claimName: pipeline-task-cache-pvc-1

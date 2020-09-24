@@ -6,10 +6,8 @@ namespace: liberty-rest-dev
 resources:
 - namespace.yaml
 
+patchesStrategicMerge:
+- pipeline-resource-liberty-rest-app.yaml
+
 bases:
 - ../../base
-
-
-
-
-

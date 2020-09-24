@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: push-image-to-oc-
+spec:
+  pipelineRef:
+    name: liberty-rest-app-create-runtime-image-test
+  resources:
+    - name: runtime-image
+      resourceRef:
+        name: liberty-rest-app

@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: Pipeline
+metadata:
+  creationTimestamp: "2020-06-26T14:11:45Z"
+  generation: 1
+  labels:
+    app.kubernetes.io/instance: liberty-rest-app
+    pipeline.openshift.io/type: kubernetes
+  name: liberty-rest-app-create-runtime-image-test
+  namespace: liberty-rest-dev
+spec:
+  resources:
+  - name: runtime-image
+    type: image
+  tasks:
+  - name: create-runtime-image-test
+    resources:
+      outputs:
+      - name: runtime-image
+        resource: runtime-image
+    taskRef:
+      kind: Task
+      name: create-runtime-image-test

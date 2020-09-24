@@ -1,0 +1,19 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: buildah-test-pr-
+spec:
+  params:
+    - name: IMAGE
+      value: https://github.com/marrober/taxi.git
+  pipelineRef:
+    name: buildah-cluster-task-test
+  workspaces:
+    - name: source # this workspace name must be declared in the Pipeline
+      volumeClaimTemplate:
+        spec:
+          accessModes:
+            - ReadWriteOnce # access mode may affect how you can use this volume in parallel tasks
+          resources:
+            requests:
+              storage: 2Gi
