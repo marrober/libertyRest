@@ -16,6 +16,10 @@ spec:
       default: ""
       Description: Application grouping within the topology view of the OpenShift web UI
       type: string
+    - name: STORAGE_DRIVER
+      description: The Buildah storage STORAGE_DRIVER
+      type: string
+      default: 'overlay'
   resources:
     inputs:
       - name: source
@@ -54,9 +58,9 @@ spec:
       resources: {}
       command:
         - oc
-        - create 
-        - '-f' 
-        - deployment-resources.yaml 
+        - create
+        - '-f'
+        - deployment-resources.yaml
       image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
       volumeMounts:
         - name: deployment-files
@@ -66,8 +70,8 @@ spec:
       resources: {}
       command:
         - oc
-        - get 
-        - all 
+        - get
+        - all
       image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
     - name: view-deployment-files
       resources: {}

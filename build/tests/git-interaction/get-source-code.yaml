@@ -1,0 +1,17 @@
+apiVersion: tekton.dev/v1alpha1
+kind: Task
+metadata:
+  name: get-source-code
+spec:
+  resources:
+    inputs:
+      - name: source
+        type: git
+  steps :
+    - name: generate
+      command:
+        - ls
+        - -alR
+        - build/
+      image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
+      workingDir: /workspace/source

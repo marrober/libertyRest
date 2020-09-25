@@ -1,0 +1,11 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: get-source-code-pr-
+spec:
+  pipelineRef:
+    name: get-source
+  resources:
+    - name: app-source
+      resourceRef:
+        name: liberty-rest-app-source-code

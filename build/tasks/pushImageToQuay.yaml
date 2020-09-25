@@ -20,12 +20,16 @@ spec:
       description: The tag to use to identify the image.
       type: string
       default: "latest"
+    - name: STORAGE_DRIVER
+      description: The Buildah storage STORAGE_DRIVER
+      type: string
+      default: 'overlay'
   steps:
     - name: buildah-tag-image
       command:
         - buildah
         - tag
-        - '--storage-driver=vfs'
+        - '--storage-driver=$(params.STORAGE_DRIVER)'
         - $(resources.inputs.runtime-image.url)
         - quay.io/$(params.quay-io-account)/$(params.quay-io-repository):$(params.quay-io-image-tag-name)
       image: registry.redhat.io/rhel8/buildah
@@ -39,7 +43,7 @@ spec:
       command:
         - buildah
         - images
-        - '--storage-driver=vfs'
+        - '--storage-driver=$(params.STORAGE_DRIVER)'
       image: registry.redhat.io/rhel8/buildah
       securityContext:
         privileged: true
@@ -50,7 +54,7 @@ spec:
       command:
         - buildah
         - push
-        - '--storage-driver=vfs'
+        - '--storage-driver=$(params.STORAGE_DRIVER)'
         - '--authfile'
         - /etc/secret-volume/.dockerconfigjson
         - quay.io/$(params.quay-io-account)/$(params.quay-io-repository):$(params.quay-io-image-tag-name)

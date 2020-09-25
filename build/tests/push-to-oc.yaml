@@ -17,7 +17,7 @@ spec:
       command:
         - buildah
         - images
-        - '--storage-driver=vfs'
+        - '--storage-driver=$(params.STORAGE_DRIVER)'
       image: registry.redhat.io/rhel8/buildah
       resources: {}
       securityContext:
@@ -29,7 +29,7 @@ spec:
       command:
         - buildah
         - push
-        - '--storage-driver=vfs'
+        - '--storage-driver=$(params.STORAGE_DRIVER)'
         - '--tls-verify=$(params.TLSVERIFY)'
         - $(resources.outputs.runtime-image.url)
         - 'docker://$(resources.outputs.runtime-image.url)'

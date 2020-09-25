@@ -2,13 +2,19 @@ apiVersion: tekton.dev/v1alpha1
 kind: Task
 metadata:
   name: clear-buildah-repo
+
 spec:
+  params:
+    - name: STORAGE_DRIVER
+      description: The Buildah storage STORAGE_DRIVER
+      type: string
+      default: 'overlay'
   steps :
     - name: buildah-list-images
       command:
         - buildah
         - images
-        - '--storage-driver=vfs'
+        - '--storage-driver=$(params.STORAGE_DRIVER)'
       image: registry.redhat.io/rhel8/buildah
       resources: {}
       securityContext:
@@ -22,7 +28,7 @@ spec:
         - rmi
         - '-a'
         - '-f'
-        - '--storage-driver=vfs'
+        - '--storage-driver=$(params.STORAGE_DRIVER)'
       image: registry.redhat.io/rhel8/buildah
       resources: {}
       securityContext:
@@ -34,7 +40,7 @@ spec:
       command:
         - buildah
         - images
-        - '--storage-driver=vfs'
+        - '--storage-driver=$(params.STORAGE_DRIVER)'
       image: registry.redhat.io/rhel8/buildah
       resources: {}
       securityContext:

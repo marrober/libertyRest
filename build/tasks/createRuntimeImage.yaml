@@ -8,6 +8,10 @@ spec:
       description: Verify the TLS on the registry endpoint
       type: string
       default: 'false'
+    - name: STORAGE_DRIVER
+      description: The Buildah storage STORAGE_DRIVER
+      type: string
+      default: "overlay"
   resources:
     inputs:
       - name: intermediate-image
@@ -15,19 +19,7 @@ spec:
     outputs:
       - name: runtime-image
         type: image
-  steps :
-    - name: view-images
-      command:
-        - buildah
-        - images
-        - '--storage-driver=vfs'
-      image: registry.redhat.io/rhel8/buildah
-      resources: {}
-      securityContext:
-        privileged: true
-      volumeMounts:
-        - name: pipeline-cache
-          mountPath: /var/lib/containers
+  steps:
     - name: gen-binary-extraction-dockerfile
       command:
         - /bin/sh
@@ -51,7 +43,7 @@ spec:
         - buildah
         - bud
         - '--tls-verify=$(params.TLSVERIFY)'
-        - '--storage-driver=vfs'
+        - '--storage-driver=$(params.STORAGE_DRIVER)'
         - '--layers'
         - '-f'
         - ext-dockerfile.gen
@@ -72,7 +64,7 @@ spec:
       command:
         - buildah
         - images
-        - '--storage-driver=vfs'
+        - '--storage-driver=$(params.STORAGE_DRIVER)'
       image: registry.redhat.io/rhel8/buildah
       resources: {}
       securityContext:
@@ -84,7 +76,7 @@ spec:
       command:
         - buildah
         - push
-        - '--storage-driver=vfs'
+        - '--storage-driver=$(params.STORAGE_DRIVER)'
         - '--tls-verify=$(params.TLSVERIFY)'
         - $(resources.outputs.runtime-image.url)
         - 'docker://$(resources.outputs.runtime-image.url)'

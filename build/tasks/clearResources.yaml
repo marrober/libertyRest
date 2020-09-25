@@ -8,6 +8,10 @@ spec:
       default: ""
       Description: Name of the application to be removed
       type: string
+    - name: STORAGE_DRIVER
+      description: The Buildah storage STORAGE_DRIVER
+      type: string
+      default: 'overlay'
   steps:
     - name: clear-resources
       command:
