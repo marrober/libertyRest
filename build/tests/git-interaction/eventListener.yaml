@@ -1,0 +1,13 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: EventListener
+metadata:
+  name: get-source-listener-interceptor
+  namespace: liberty-rest-dev
+spec:
+  serviceAccountName: pipeline
+  triggers:
+  - bindings:
+    - name: get-source-binding
+    name: github-listener
+    template:
+      name: get-resource-template

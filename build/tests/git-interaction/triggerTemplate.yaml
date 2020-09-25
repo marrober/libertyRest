@@ -1,0 +1,39 @@
+apiVersion: triggers.tekton.dev/v1alpha1
+kind: TriggerTemplate
+metadata:
+  name: get-resource-template
+spec:
+  params:
+  - name: gitrevision
+    default: master
+  - name: gitrepositoryurl
+  - name: fullname
+  - name: io.openshift.build.commit.ref
+  - name: io.openshift.build.commit.id
+  - name: io.openshift.build.commit.date
+  - name: io.openshift.build.commit.message
+  - name: io.openshift.build.commit.author
+  - name: service-account
+  resourcetemplates:
+  - apiVersion: tekton.dev/v1beta1
+    kind: PipelineRun
+    metadata:
+      generateName: get-source-code-pr-tr-
+    spec:
+      serviceAccountName: $(params.service-account)
+      pipelineRef:
+        name: get-source
+      resources:
+        - name: app-source
+          resourceSpec:
+            type: git
+            params:
+            - name: revision
+              value: $(params.gitrevision)
+            - name: url
+              value: $(params.gitrepositoryurl)
+      params:
+        - name: revision
+          value: $(params.gitrevision)
+        - name: url
+          value: $(params.gitrepositoryurl)
