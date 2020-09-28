@@ -4,19 +4,19 @@ metadata:
   name: get-source-binding
 spec:
   params:
-  - name: gitrepositoryurl
+  - name: gitrepository.url
     value: $(body.repository.html_url)
-  - name: fullname
+  - name: gitrepository.fullname
     value: $(body.repository.full_name)
-  - name: io.openshift.build.commit.ref
+  - name: commit.ref
     value: $(body.ref)
-  - name: io.openshift.build.commit.id
+  - name: commit.id
     value: $(body.head_commit.id)
-  - name: io.openshift.build.commit.date
+  - name: commit.date
     value: $(body.head_commit.timestamp)
-  - name: io.openshift.build.commit.message
+  - name: commit.message
     value: $(body.head_commit.message)
-  - name: io.openshift.build.commit.author
+  - name: commit.author
     value: $(body.head_commit.author.name)
   - name: service-account
     value: pipeline
