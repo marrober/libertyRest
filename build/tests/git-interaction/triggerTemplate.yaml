@@ -8,7 +8,7 @@ spec:
     default: master
   - name: gitrepositoryurl
 #  - name: gitrepository.fullname
-#  - name: commit.ref
+#  - name: commit_ref
 #  - name: commit.id
 #  - name: commit.date
 #  - name: commit.message
