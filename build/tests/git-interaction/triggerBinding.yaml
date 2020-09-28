@@ -4,8 +4,6 @@ metadata:
   name: get-source-binding
 spec:
   params:
-  - name: gitrevision
-    value: $(body.pull_request.head.sha)
   - name: gitrepositoryurl
     value: $(body.repository.html_url)
   - name: fullname
