@@ -7,7 +7,9 @@ spec:
   serviceAccountName: pipeline
   triggers:
   - bindings:
-    - name: get-source-binding
+# Tech preview OpenShift Pipelines requires a 'ref' for the binding.
+# 4.5 version and prior require a 'name' for the binding.
+    - ref: get-source-binding
     name: github-listener
     template:
       name: get-resource-template

@@ -9,4 +9,4 @@ spec:
     targetPort: http-listener
   to:
     kind: Service
-    name: get-source-listener-interceptor
+    name: el-get-source-listener-interceptor
