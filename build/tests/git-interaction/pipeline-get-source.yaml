@@ -15,18 +15,18 @@ spec:
   params:
   - name: gitrepository.url
     type: string
-  - name: gitrepository.fullname
-    type: string
-  - name: commit.ref
-    type: string
-  - name: commit.id
-    type: string
-  - name: commit.date
-    type: string
-  - name: commit.message
-    type: string
-  - name: commit.author
-    type: string
+#  - name: gitrepository.fullname
+#    type: string
+#  - name: commit.ref
+#    type: string
+#  - name: commit.id
+#    type: string
+#  - name: commit.date
+#    type: string
+#  - name: commit.message
+#    type: string
+#  - name: commit.author
+#    type: string
   tasks:
   - name: get-source-code
     resources:
