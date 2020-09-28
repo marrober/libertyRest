@@ -27,11 +27,6 @@ spec:
         - name: app-source
           resourceSpec:
             type: git
-            params:
-            - name: revision
-              value: $(params.gitrevision)
-            - name: url
-              value: $(params.gitrepository.url)
       params:
         - name: revision
           value: $(params.gitrevision)
