@@ -6,7 +6,7 @@ spec:
   params:
   - name: gitrevision
     default: master
-  - name: gitrepositoryurl
+  - name: gitrepository.url
   - name: gitrepository.fullname
   - name: commit.ref
   - name: commit.id
@@ -31,23 +31,23 @@ spec:
               - name: revision
                 value: $(params.gitrevision)
               - name: url
-                value: $(params.gitrepositoryurl)
+                value: $(params.gitrepository.url)
       params:
         - name: revision
           value: $(params.gitrevision)
-        - name: gitrepositoryurl
-          value: $(params.gitrepositoryurl)
-        - name: gitrepository_fullname
+        - name: gitrepository.url
+          value: $(params.gitrepository.url)
+        - name: gitrepository.fullname
           value: $(params.gitrepository.fullname)
-        - name: commit_ref
+        - name: commit.ref
           value: $(params.commit.ref)
-        - name: commit_id
+        - name: commit.id
           value: $(params.commit.id)
-        - name: commit_date
+        - name: commit.date
           value: $(params.commit.date)
-        - name: commit_message
+        - name: commit.message
           value: $(params.commit.message)
-        - name: commit_author
+        - name: commit.author
           value: $(params.commit.author)
         
 
