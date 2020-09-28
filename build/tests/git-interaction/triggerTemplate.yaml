@@ -35,7 +35,7 @@ spec:
       params:
         - name: revision
           value: $(params.gitrevision)
-        - name: url
+        - name: gitrepositoryurl
           value: $(params.gitrepositoryurl)
 #        - name: gitrepository_fullname
 #          value: $(params.gitrepository.fullname)

@@ -13,8 +13,8 @@ spec:
   - name: app-source
     type: git
   params:
-#  - name: gitrepositoryurl
-#    type: string
+  - name: gitrepositoryurl
+    type: string
 #  - name: gitrepository.fullname
 #    type: string
 #  - name: commit.ref
