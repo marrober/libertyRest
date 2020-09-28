@@ -7,12 +7,12 @@ spec:
   - name: gitrevision
     default: master
   - name: gitrepositoryurl
-#  - name: gitrepository.fullname
-#  - name: commit_ref
-#  - name: commit.id
-#  - name: commit.date
-#  - name: commit.message
-#  - name: commit.author
+  - name: gitrepository.fullname
+  - name: commit.ref
+  - name: commit.id
+  - name: commit.date
+  - name: commit.message
+  - name: commit.author
   - name: service-account
   resourcetemplates:
   - apiVersion: tekton.dev/v1beta1
@@ -37,17 +37,17 @@ spec:
           value: $(params.gitrevision)
         - name: gitrepositoryurl
           value: $(params.gitrepositoryurl)
-#        - name: gitrepository_fullname
-#          value: $(params.gitrepository.fullname)
-#        - name: commit_ref
-#          value: $(params.commit.ref)
-#        - name: commit_id
-#          value: $(params.commit.id)
-#        - name: commit_date
-#          value: $(params.commit.date)
-#        - name: commit_message
-#          value: $(params.commit.message)
-#        - name: commit_author
-#          value: $(params.commit.author)
+        - name: gitrepository_fullname
+          value: $(params.gitrepository.fullname)
+        - name: commit_ref
+          value: $(params.commit.ref)
+        - name: commit_id
+          value: $(params.commit.id)
+        - name: commit_date
+          value: $(params.commit.date)
+        - name: commit_message
+          value: $(params.commit.message)
+        - name: commit_author
+          value: $(params.commit.author)
         
 
