@@ -6,7 +6,7 @@ spec:
   params:
   - name: gitrevision
     default: master
-  - name: gitrepository.url
+  - name: gitrepositoryurl
 #  - name: gitrepository.fullname
 #  - name: commit.ref
 #  - name: commit.id
@@ -27,11 +27,16 @@ spec:
         - name: app-source
           resourceSpec:
             type: git
+            params:
+              - name: revision
+                value: $(params.gitrevision)
+              - name: url
+                value: $(params.gitrepositoryurl)
       params:
         - name: revision
           value: $(params.gitrevision)
         - name: url
-          value: $(params.gitrepository.url)
+          value: $(params.gitrepositoryurl)
 #        - name: gitrepository_fullname
 #          value: $(params.gitrepository.fullname)
 #        - name: commit_ref

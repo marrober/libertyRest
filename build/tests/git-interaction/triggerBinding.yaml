@@ -4,7 +4,7 @@ metadata:
   name: get-source-binding
 spec:
   params:
-  - name: gitrepository.url
+  - name: gitrepositoryurl
     value: $(body.repository.html_url)
   - name: gitrepository.fullname
     value: $(body.repository.full_name)
