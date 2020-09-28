@@ -13,19 +13,19 @@ spec:
   - name: app-source
     type: git
   params:
-  - name: gitrepository.url
+  - name: gitrepository_url
     type: string
-  - name: gitrepository.fullname
+  - name: gitrepository_fullname
     type: string
-  - name: commit.ref
+  - name: commit_ref
     type: string
-  - name: commit.id
+  - name: commit_id
     type: string
-  - name: commit.date
+  - name: commit_date
     type: string
-  - name: commit.message
+  - name: commit_message
     type: string
-  - name: commit.author
+  - name: commit_author
     type: string
   tasks:
   - name: get-source-code
@@ -33,6 +33,21 @@ spec:
       inputs:
       - name: source
         resource: app-source
+    params:
+    - name: gitrepository_url
+      value: $(params.gitrepository_url)
+    - name: gitrepository_fullname
+      value: $(params.gitrepository_fullname)
+    - name: commit_ref
+      value: $(params.commit_ref)
+    - name: commit_id
+      value: $(params.commit_id)
+    - name: commit_date
+      value: $(params.commit_date)
+    - name: commit_message
+      value: $(params.commit_message)
+    - name: commit_author
+      value: $(params.commit_author)
     taskRef:
       name: get-source-code
       kind: Task

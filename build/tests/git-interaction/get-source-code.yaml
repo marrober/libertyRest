@@ -7,11 +7,45 @@ spec:
     inputs:
       - name: source
         type: git
+  params:
+    - name: gitrepository_url
+      type: string
+    - name: gitrepository_fullname
+      type: string
+    - name: commit_ref
+      type: string
+    - name: commit_id
+      type: string
+    - name: commit_date
+      type: string
+    - name: commit_message
+      type: string
+    - name: commit_author
+      type: string  
   steps :
     - name: generate
       command:
         - ls
         - -alR
         - build/
+      image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
+      workingDir: /workspace/source
+    - name: display-parameters
+      command:
+        - /bin/sh
+        - '-c'
+      args:
+        - |-
+          echo "--------------------------------------------------------"
+          echo "$(params.gitrepository_url)" > info-file
+          echo "$(params.gitrepository_fullname)" >> info-file
+          echo "$(params.commit_ref)" >> info-file
+          echo "$(params.commit_id)" >> info-file
+          echo "$(params.commit_date)" >> info-file
+          echo "$(params.commit_ref)" >> info-file
+          echo "$(params.commit_author)" >> info-file
+          echo "--------------------------------------------------------"
+          cat info-file
+          echo "--------------------------------------------------------"
       image: registry.redhat.io/ocp-tools-43-tech-preview/source-to-image-rhel8
       workingDir: /workspace/source
