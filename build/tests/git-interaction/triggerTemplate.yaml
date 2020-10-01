@@ -14,6 +14,10 @@ spec:
   - name: commit.message
   - name: commit.author
   - name: service-account
+  - name: STORAGE_DRIVER
+    default: 'overlay'
+  - name: TLSVERIFY
+    default: 'false'
   resourcetemplates:
   - apiVersion: tekton.dev/v1beta1
     kind: PipelineRun
@@ -49,5 +53,9 @@ spec:
           value: $(params.commit.message)
         - name: commit_author
           value: $(params.commit.author)
+        - name: STORAGE_DRIVER
+          value: $(params.STORAGE_DRIVER)
+        - name: TLSVERIFY
+          value: $(params.TLSVERIFY)
         
 

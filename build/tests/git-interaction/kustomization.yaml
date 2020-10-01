@@ -1,0 +1,10 @@
+resources:
+    - eventListenerRoute.yaml  
+    - image-resource.yaml           
+    - pipeline-get-source.yaml     
+    - triggerTemplate.yaml
+    - eventListener.yaml
+    - pipelineRun-get-source.yaml
+    - get-source-code.yaml     
+    - persistent-volume-claim.yaml  
+    - triggerBinding.yaml
