@@ -16,10 +16,6 @@ spec:
       default: ""
       Description: Application grouping within the topology view of the OpenShift web UI
       type: string
-    - name: STORAGE_DRIVER
-      description: The Buildah storage STORAGE_DRIVER
-      type: string
-      default: 'overlay'
   resources:
     inputs:
       - name: source

@@ -27,7 +27,6 @@ spec:
     - name: STORAGE_DRIVER
       description: The Buildah storage STORAGE_DRIVER
       type: string
-      default: 'overlay'
   resources:
     inputs:
       - name: source

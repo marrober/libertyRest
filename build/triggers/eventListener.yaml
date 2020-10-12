@@ -7,7 +7,7 @@ spec:
   serviceAccountName: pipeline
   triggers:
   - bindings:
-    - name: liberty-rest-pipeline-binding
+    - ref: liberty-rest-pipeline-binding
     name: github-listener
     template:
       name: liberty-rest-trigger-pipeline-template

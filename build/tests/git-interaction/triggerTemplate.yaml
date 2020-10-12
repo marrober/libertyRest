@@ -15,7 +15,7 @@ spec:
   - name: commit.author
   - name: service-account
   - name: STORAGE_DRIVER
-    default: 'overlay'
+    default: overlay
   - name: TLSVERIFY
     default: 'false'
   resourcetemplates:
@@ -36,6 +36,9 @@ spec:
                 value: $(params.gitrevision)
               - name: url
                 value: $(params.gitrepository.url)
+        - name: image-resource
+          resourceRef:
+            name: image-resource                
       params:
         - name: revision
           value: $(params.gitrevision)

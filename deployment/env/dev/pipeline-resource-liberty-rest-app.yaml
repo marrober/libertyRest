@@ -2,7 +2,6 @@ apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
   name: liberty-rest-app
-  namespace: liberty-rest
 spec:
   params:
   - name: url
