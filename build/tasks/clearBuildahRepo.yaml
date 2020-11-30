@@ -7,6 +7,7 @@ spec:
     - name: STORAGE_DRIVER
       description: The Buildah storage STORAGE_DRIVER
       type: string
+      default: 'overlay'
   steps :
     - name: buildah-list-images
       command:
