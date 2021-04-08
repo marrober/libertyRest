@@ -2,9 +2,9 @@ apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
   name: liberty-rest-app
-  namespace: liberty-rest
+  namespace: liberty-rest-dev
 spec:
   params:
   - name: url
     value: image-registry.openshift-image-registry.svc:5000/liberty-rest/liberty-rest-app
-  type: image 
+  type: image

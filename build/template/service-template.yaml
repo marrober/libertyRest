@@ -1,0 +1,23 @@
+apiVersion: v1
+kind: Template
+parameters:
+  - name: APP_NAME
+    description: "Name of the application to be deployed"
+    value:
+metadata:
+  name: service-template
+  annotations:
+    description: "Service template"
+objects:
+  - kind: Service
+    apiVersion: v1
+    metadata:
+      name: ${APP_NAME}
+      labels:
+        app: ${APP_NAME}
+    spec:
+      ports:
+      - name: http
+        port: 9080
+      selector:
+        app: ${APP_NAME}

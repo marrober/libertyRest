@@ -4,9 +4,17 @@ metadata:
   name: oc-process-deployment-template
 spec:
   params:
-    - name: templateFileName
+    - name: appTemplateFileName
       default: ""
-      Description: Deployment template file
+      Description: Application deployment template file
+      type: string
+    - name: serviceTemplateFileName
+      default: ""
+      Description: Service deployment template file
+      type: string
+    - name: routeTemplateFileName
+      default: ""
+      Description: Route deployment template file
       type: string
     - name: appName
       default: ""
@@ -40,7 +48,9 @@ spec:
         - '-c'
       args:
         - |-
-          echo "oc process -f /workspace/source/$(params.templateFileName) -p APP_NAME=$(params.appName) -p APP_GROUP=$(params.appGroup) -p APP_IMAGE=$(resources.inputs.runtime-image.url) > deployment-resources.yaml" > oc-process-cmd.sh
+          echo "oc process -f /workspace/source/$(params.appTemplateFileName) -p APP_NAME=$(params.appName) -p APP_GROUP=$(params.appGroup) -p APP_IMAGE=$(resources.inputs.runtime-image.url) > app-deploy.yaml" > oc-process-cmd.sh
+          echo "oc process -f /workspace/source/$(params.serviceTemplateFileName) -p APP_NAME=$(params.appName) > service-deploy.yaml" >> oc-process-cmd.sh
+          echo "oc process -f /workspace/source/$(params.routeTemplateFileName) -p APP_NAME=$(params.appName) > route-deploy.yaml" >> oc-process-cmd.sh
           echo "Generated oc process script command"
           cat oc-process-cmd.sh
           chmod a+x oc-process-cmd.sh

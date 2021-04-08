@@ -14,7 +14,3 @@ spec:
     taskRef:
       kind: Task
       name: clear-buildah-repo
-   
-
-      
-      

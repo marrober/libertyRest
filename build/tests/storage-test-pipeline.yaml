@@ -2,7 +2,7 @@ apiVersion: tekton.dev/v1beta1
 kind: Pipeline
 metadata:
   name: storage-test
-  namespace: liberty-rest
+  namespace: liberty-rest-dev
 spec:
   resources:
   - name: app-source

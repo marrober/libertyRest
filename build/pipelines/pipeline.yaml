@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/instance: liberty-rest-app
     pipeline.openshift.io/type: kubernetes
   name: liberty-rest-app
-  namespace: liberty-rest
+  namespace: liberty-rest-dev
 spec:
   resources:
   - name: app-source
@@ -17,9 +17,15 @@ spec:
   - name: runtime-image
     type: image
   params:
-  - name: templateFileName
+  - name: appTemplateFileName
     type: string
-    default: build/template/deploy-app-template.yaml
+    default: build/template/app-template.yaml
+  - name: serviceTemplateFileName
+    type: string
+    default: build/template/service-template.yaml
+  - name: routeTemplateFileName
+    type: string
+    default: build/template/route-template.yaml
   - name: appName
     type: string
     default: liberty-rest
@@ -87,8 +93,12 @@ spec:
       - name: runtime-image
         resource: runtime-image
     params:
-      - name: templateFileName
-        value: $(params.templateFileName)
+      - name: appTemplateFileName
+        value: $(params.appTemplateFileName)
+      - name: serviceTemplateFileName
+        value: $(params.serviceTemplateFileName)
+      - name: routeTemplateFileName
+        value: $(params.routeTemplateFileName)                
       - name: appName
         value: $(params.appName)
       - name: appGroup
@@ -108,7 +118,7 @@ spec:
       - name: quay-io-image-tag-name
         value: $(params.quay-io-image-tag-name)
       - name: STORAGE_DRIVER
-        value: $(params.STORAGE_DRIVER)      
+        value: $(params.STORAGE_DRIVER)
     resources:
       inputs:
       - name: runtime-image

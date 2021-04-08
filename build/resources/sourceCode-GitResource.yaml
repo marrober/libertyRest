@@ -2,9 +2,11 @@ apiVersion: tekton.dev/v1alpha1
 kind: PipelineResource
 metadata:
   name: liberty-rest-app-source-code
-  namespace: liberty-rest
+  namespace: liberty-rest-dev
 spec:
   params:
   - name: url
     value: https://github.com/marrober/libertyRest.git
+  - name: revision
+    value: acs
   type: git

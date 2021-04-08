@@ -7,7 +7,7 @@ metadata:
     app.kubernetes.io/instance: liberty-rest-app
     pipeline.openshift.io/type: kubernetes
   name: liberty-rest-app-test
-  namespace: liberty-rest
+  namespace: liberty-rest-dev
 spec:
   params:
   - name: appName
