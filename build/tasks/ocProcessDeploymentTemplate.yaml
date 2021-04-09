@@ -36,12 +36,8 @@ spec:
       command:
         - ls
         - -al
-        - /workspace/source/$(params.templateFileName)
+        - /workspace/source/build/template
       image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
-      volumeMounts:
-        - name: deployment-files
-          mountPath: /deployment-files
-      workingDir: /deployment-files
     - name: gen-oc-process-script
       command:
         - /bin/sh
@@ -55,18 +51,26 @@ spec:
           cat oc-process-cmd.sh
           chmod a+x oc-process-cmd.sh
           ./oc-process-cmd.sh
+          echo "apiVersion: kustomize.config.k8s.io/v1beta1" > kustomization.yaml
+          echo "kind: Kustomization" >> kustomization.yaml
+          echo "namespace: liberty-rest-dev" >> kustomization.yaml
+          echo "resources:" >> kustomization.yaml
+          echo "- app-deploy.yaml" >> kustomization.yaml
+          echo "- service-deploy.yaml" >> kustomization.yaml
+          echo "- route-deploy.yaml" >> kustomization.yaml
+          cat kustomization.yaml
       image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
       volumeMounts:
         - name: deployment-files
           mountPath: /deployment-files
       workingDir: /deployment-files
-    - name: oc-create-resources
+    - name: oc-create-deployment
       resources: {}
       command:
         - oc
         - create
-        - '-f'
-        - deployment-resources.yaml
+        - '-k'
+        - '.'
       image: image-registry.openshift-image-registry.svc:5000/openshift/cli:latest
       volumeMounts:
         - name: deployment-files

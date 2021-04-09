@@ -4,9 +4,9 @@ metadata:
   creationTimestamp: "2020-06-26T14:11:45Z"
   generation: 1
   labels:
-    app.kubernetes.io/instance: jke-banking-app
+    app.kubernetes.io/instance: liberty-rest-app
     pipeline.openshift.io/type: kubernetes
-  name: jke-banking-app-deploy
+  name: liberty-rest-app-pipepline-test-deploy-app
   namespace: liberty-rest-dev
 spec:
   resources:
@@ -14,17 +14,41 @@ spec:
     type: git
   - name: runtime-image
     type: image
+  params:
+  - name: appTemplateFileName
+    type: string
+    default: build/template/app-template.yaml
+  - name: serviceTemplateFileName
+    type: string
+    default: build/template/service-template.yaml
+  - name: routeTemplateFileName
+    type: string
+    default: build/template/route-template.yaml
+  - name: appName
+    type: string
+    default: liberty-rest
+  - name: appGroup
+    type: string
+    default: Liberty
   tasks:
-  - name: deploy-image
+  - name: deploy-application
     resources:
       inputs:
       - name: source
         resource: app-source
       - name: runtime-image
         resource: runtime-image
+    params:
+      - name: appTemplateFileName
+        value: $(params.appTemplateFileName)
+      - name: serviceTemplateFileName
+        value: $(params.serviceTemplateFileName)
+      - name: routeTemplateFileName
+        value: $(params.routeTemplateFileName)
+      - name: appName
+        value: $(params.appName)
+      - name: appGroup
+        value: $(params.appGroup)
     taskRef:
       kind: Task
       name: oc-process-deployment-template
-
-      
-      

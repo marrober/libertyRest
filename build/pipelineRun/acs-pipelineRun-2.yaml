@@ -1,0 +1,30 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  generateName: liberty-rest-acs-2-
+spec:
+  pipelineRef:
+    name: config-validation-liberty-rest-2
+  params:
+  - name: rox_central_endpoint
+    value: roxsecrets
+  - name: rox_api_token
+    value: roxsecrets
+  - name: source_location
+    value: "build/assets-for-validation"
+  resources:
+    - name: app-source
+      resourceRef:
+        name: liberty-rest-app-source-code
+  workspaces:
+    - name: files
+      volumeClaimTemplate:
+        metadata:
+          creationTimestamp: null
+        spec:
+          accessModes:
+            - ReadWriteOnce
+          resources:
+            requests:
+              storage: 1Gi
+        status: {}
