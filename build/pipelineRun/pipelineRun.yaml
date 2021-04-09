@@ -16,8 +16,12 @@ spec:
       resourceRef:
         name: liberty-rest-app
   params:
-    - name: templateFileName
-      value: build/template/deploy-app-template.yaml
+    - name: appTemplateFileName
+      value: build/template/app-template.yaml
+    - name: serviceTemplateFileName
+      value: build/template/service-template.yaml
+    - name: routeTemplateFileName
+      value: build/template/route-template.yaml
     - name: appName
       value: liberty-rest
     - name: appGroup
