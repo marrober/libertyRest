@@ -1,0 +1,20 @@
+apiVersion: tekton.dev/v1beta1
+kind: Task
+metadata:
+  name: write-yaml-file
+spec:
+  params:
+  - description: Contents of the deployment YAML to be checked
+    name: yaml
+    type: string
+  steps:
+  - image: centos
+    name: write-yaml
+    resources: {}
+    script: |
+      #!/usr/bin/env bash
+      echo "$(params.yaml)" | base64 -d > /deployfile/deploy.yml
+      cat /deployfile/deploy.yml
+  workspaces:
+  - name: deployfiles
+    mountPath: /deployfile

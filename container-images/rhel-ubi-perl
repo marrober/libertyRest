@@ -1,0 +1,7 @@
+FROM registry.access.redhat.com/ubi8
+
+USER root
+
+RUN  mkdir /perl && yum install -y perl
+
+USER 1001

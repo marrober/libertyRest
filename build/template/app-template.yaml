@@ -34,7 +34,6 @@ objects:
           annotations:
         spec:
           containers:
-          - env:
             image: ${APP_IMAGE}
             imagePullPolicy: Always
             name: ${APP_NAME}
@@ -42,3 +41,7 @@ objects:
             - containerPort: 9080
               name: http
               protocol: TCP
+            envFrom:
+              - prefix: LR
+                configMapRef:
+                  name: logonregistration
