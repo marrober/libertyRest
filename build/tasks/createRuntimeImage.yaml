@@ -52,8 +52,6 @@ spec:
         - .
       image: registry.redhat.io/rhel8/buildah
       resources: {}
-      securityContext:
-        privileged: true
       volumeMounts:
         - name: pipeline-cache
           mountPath: /var/lib/containers
@@ -67,8 +65,6 @@ spec:
         - '--storage-driver=$(params.STORAGE_DRIVER)'
       image: registry.redhat.io/rhel8/buildah
       resources: {}
-      securityContext:
-        privileged: true
       volumeMounts:
         - name: pipeline-cache
           mountPath: /var/lib/containers
@@ -82,8 +78,6 @@ spec:
         - 'docker://$(resources.outputs.runtime-image.url)'
       image: registry.redhat.io/rhel8/buildah
       resources: {}
-      securityContext:
-        privileged: true
       volumeMounts:
         - name: pipeline-cache
           mountPath: /var/lib/containers

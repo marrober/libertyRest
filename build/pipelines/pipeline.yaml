@@ -98,7 +98,7 @@ spec:
       - name: serviceTemplateFileName
         value: $(params.serviceTemplateFileName)
       - name: routeTemplateFileName
-        value: $(params.routeTemplateFileName)                
+        value: $(params.routeTemplateFileName)
       - name: appName
         value: $(params.appName)
       - name: appGroup
